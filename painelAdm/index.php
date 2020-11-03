@@ -4,9 +4,9 @@ $notificacoes = 3;
 //variaveis dos menus
 $item1 = 'home';
 $item2 = 'usuarios';
-$item3= 'racas';
+$item3 = 'racas';
 $item4 = 'animais';
-$item5= 'servicos';
+$item5 = 'servicos';
 $item6 = 'notificacoes';
 $item7 = 'agendar';
 ?>
@@ -58,16 +58,16 @@ $item7 = 'agendar';
             <div class="row">
                 <div class="col-md4 mb-4">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-home-tab" href="index.php?acao=<?php echo $item1?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-house-user mr-2"></i>Home</a>
-                        <a class="nav-link" id="link-usuarios" href="index.php?acao=<?php echo $item2?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-users mr-2"></i>Cadastro Usuários</a>
-                        <a class="nav-link" id="link-racas" href="index.php?acao=<?php echo $item3?>" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-paw mr-2"></i>Cadastro Raças</a>
-                        <a class="nav-link" id="link-animais"  href="index.php?acao=<?php echo $item4?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-dog mr-2"></i>Cadastro Animais</a>
-                        <a class="nav-link" id="v-pills-settings-tab"  href="index.php?acao=<?php echo $item5?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-hospital-symbol mr-2"></i>Cadastro de Serviços</a>
-                        <a class="nav-link" id="v-pills-settings-tab"  href="index.php?acao=<?php echo $item7?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-calendar-alt mr-2"></i>Agendar</a>
+                        <a class="nav-link active" id="v-pills-home-tab" href="index.php?acao=<?php echo $item1 ?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-house-user mr-2"></i>Home</a>
+                        <a class="nav-link" id="link-usuarios" href="index.php?acao=<?php echo $item2 ?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-users mr-2"></i>Cadastro Usuários</a>
+                        <a class="nav-link" id="link-racas" href="index.php?acao=<?php echo $item3 ?>" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-paw mr-2"></i>Cadastro Raças</a>
+                        <a class="nav-link" id="link-animais" href="index.php?acao=<?php echo $item4 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-dog mr-2"></i>Cadastro Animais</a>
+                        <a class="nav-link" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item5 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-hospital-symbol mr-2"></i>Cadastro de Serviços</a>
+                        <a class="nav-link" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item7 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-calendar-alt mr-2"></i>Agendar</a>
 
                         <?php
                         if ($notificacoes > 0) { ?>
-                            <a class="nav-link" id="v-pills-settings-tab"  href="index.php?acao=<?php echo $item6?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-bell mr-2">
+                            <a class="nav-link" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item6 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-bell mr-2">
                                 </i>Notificações<span class="badge badge-light">
                                     <?php echo $notificacoes; ?></span></a> <!-- $notificacoes Variavel para armazenar os dados das notificações!-->
                         <?php } ?>
@@ -76,71 +76,39 @@ $item7 = 'agendar';
                 </div>
                 <div class="col-md-10">
                     <div class="tab-content" id="v-pills-tabContent">
-                            <!--Execucao do home e chamada-->
-                        <?php if (@$_GET['acao'] == $item1) { ?> <!--Esse @ ignora a execucao dos alerts caso nao exista-->
-                            <div class="tab-pane fade show active" role="tabpanel">
-                                <?php include_once($item1.".php") ?>
-                            </div>
-                        <?php } ?>
-                            <!--Execucao do usuarios e chamada-->
-                        <?php if (@$_GET['acao'] == $item2) { ?>
-                            <div class="tab-pane fade show active" role="tabpanel">
-                            <?php include_once($item2.".php") ?>
-                            </div>
-                        <?php } ?>
-                            <!--Execucao do racas e chamada-->
-                        <?php if (@$_GET['acao'] == $item3) { ?>
-                            <div class="tab-pane fade show active" role="tabpanel">
-                            <?php include_once($item3.".php") ?>
-                            </div>
-                        <?php } ?>
-                        <!--Execucao do animais e chamada-->
-                        <?php if (@$_GET['acao'] == $item4) { ?>
-                            <div class="tab-pane fade show active" role="tabpanel">
-                            <?php include_once($item4.".php") ?>
-                            </div>
-                        <?php } ?>
 
-                        <!--Execucao do servicos e chamada-->
-                        <?php if (@$_GET['acao'] == $item5) { ?>
-                            <div class="tab-pane fade show active" role="tabpanel">
-                            <?php include_once($item5.".php") ?>
-                            </div>
-                        <?php } ?>
+                        <div class="tab-pane fade show active" role="tabpanel">
+                            <?php if (@$_GET['acao'] == $item1) {
+                                include_once($item1 . ".php");
+                            } elseif (@$_GET['acao'] == $item2) {
+                                include_once($item2 . ".php");
+                            } elseif (@$_GET['acao'] == $item3) {
+                                include_once($item3 . ".php");
+                            } elseif (@$_GET['acao'] == $item4) {
+                                include_once($item4 . ".php");
+                            } elseif (@$_GET['acao'] == $item5) {
+                                include_once($item5 . ".php");
+                            } elseif (@$_GET['acao'] == $item6) {
+                                include_once($item6 . ".php");
+                            } elseif (@$_GET['acao'] == $item7) {
+                                include_once($item7 . ".php");
+                            }
+                            ?>
+                        </div>
 
-                        <!--Execucao do notificacoes e chamada-->
-                        <?php if (@$_GET['acao'] == $item6) { ?>
-                            <div class="tab-pane fade show active" role="tabpanel">
-                            <?php include_once($item6.".php") ?>
-                            </div>
-                        <?php } ?>
-
-                        <!--Execucao do agendar e chamada-->
-                        <?php if (@$_GET['acao'] == $item7) { ?>
-                            <div class="tab-pane fade show active" role="tabpanel">
-                            <?php include_once($item7.".php") ?>
-                            </div>
-                        <?php } ?>
-                        
 
 
                     </div>
                 </div>
             </div>
         </div>
+
+
     </body>
 
     </html>
 
 
+
+
     <?php
-    /*
-    //Executar um link href com script
-    if (isset($_GET['btnbuscarUsuarios'])) { ?>
-
-        <script type="text/javascript">
-            $('#link-usuarios').click();
-        </script>
-    <?php }
-
-    ?>*/
