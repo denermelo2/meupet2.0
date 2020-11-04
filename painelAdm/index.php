@@ -9,6 +9,25 @@ $item4 = 'animais';
 $item5 = 'servicos';
 $item6 = 'notificacoes';
 $item7 = 'agendar';
+ 
+//VERIFICAR COM O MENU CLICADO E PASSAR O ESTADO DE ATIVO
+
+if (@$_GET['acao'] == $item1) {
+    $item1ativo = 'active';
+} elseif(@$_GET['acao'] == $item2 or isset($_GET[$item2])) {
+    $item2ativo = 'active';
+} elseif (@$_GET['acao'] == $item3) {
+    $item3ativo = 'active';
+} elseif (@$_GET['acao'] == $item4) {
+    $item4ativo = 'active';
+} elseif (@$_GET['acao'] == $item5) {
+    $item5ativo = 'active';
+} elseif (@$_GET['acao'] == $item6) {
+    $item6ativo = 'active';
+} elseif (@$_GET['acao'] == $item7) {
+    $item7ativo = 'active';
+}
+
 ?>
 
 <DOCTYPE html>
@@ -58,16 +77,16 @@ $item7 = 'agendar';
             <div class="row">
                 <div class="col-md4 mb-4">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-home-tab" href="index.php?acao=<?php echo $item1 ?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-house-user mr-2"></i>Home</a>
-                        <a class="nav-link" id="link-usuarios" href="index.php?acao=<?php echo $item2 ?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-users mr-2"></i>Cadastro Usuários</a>
-                        <a class="nav-link" id="link-racas" href="index.php?acao=<?php echo $item3 ?>" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-paw mr-2"></i>Cadastro Raças</a>
-                        <a class="nav-link" id="link-animais" href="index.php?acao=<?php echo $item4 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-dog mr-2"></i>Cadastro Animais</a>
-                        <a class="nav-link" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item5 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-hospital-symbol mr-2"></i>Cadastro de Serviços</a>
-                        <a class="nav-link" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item7 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-calendar-alt mr-2"></i>Agendar</a>
+                        <a class="nav-link <?php echo $item1ativo  ?>" id="v-pills-home-tab" href="index.php?acao=<?php echo $item1 ?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-house-user mr-2"></i>Home</a>
+                        <a class="nav-link <?php echo $item2ativo  ?>" id="link-usuarios" href="index.php?acao=<?php echo $item2 ?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-users mr-2"></i>Cadastro Usuários</a>
+                        <a class="nav-link <?php echo $item3ativo  ?>" id="link-racas" href="index.php?acao=<?php echo $item3 ?>" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-paw mr-2"></i>Cadastro Raças</a>
+                        <a class="nav-link <?php echo $item4ativo  ?>" id="link-animais" href="index.php?acao=<?php echo $item4 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-dog mr-2"></i>Cadastro Animais</a>
+                        <a class="nav-link <?php echo $item5ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item5 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-hospital-symbol mr-2"></i>Cadastro de Serviços</a>
+                        <a class="nav-link <?php echo $item7ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item7 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-calendar-alt mr-2"></i>Agendar</a>
 
                         <?php
                         if ($notificacoes > 0) { ?>
-                            <a class="nav-link" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item6 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-bell mr-2">
+                            <a class="nav-link <?php echo $item6ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item6 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-bell mr-2">
                                 </i>Notificações<span class="badge badge-light">
                                     <?php echo $notificacoes; ?></span></a> <!-- $notificacoes Variavel para armazenar os dados das notificações!-->
                         <?php } ?>
@@ -80,7 +99,7 @@ $item7 = 'agendar';
                         <div class="tab-pane fade show active" role="tabpanel">
                             <?php if (@$_GET['acao'] == $item1) {
                                 include_once($item1 . ".php");
-                            } elseif (@$_GET['acao'] == $item2) {
+                            } elseif(@$_GET['acao'] == $item2 or isset($_GET[$item2])){
                                 include_once($item2 . ".php");
                             } elseif (@$_GET['acao'] == $item3) {
                                 include_once($item3 . ".php");
