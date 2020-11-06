@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="login-form">
-        <form action="" method="post">
+        <form action="autenticar.php" method="post">
             <div class="logo">
                 <img src="images/logo.png" alt ="Meu pet">
             </div>

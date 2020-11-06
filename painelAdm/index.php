@@ -1,4 +1,13 @@
 <?php
+
+
+//verificações para o login
+@session_start();
+if(!isset($_SESSION['nome_usuario'])){
+    header("location:../index.php");
+}
+
+
 $notificacoes = 3;
 
 //variaveis dos menus
@@ -64,10 +73,10 @@ if (@$_GET['acao'] == $item1) {
                 <img class="float-left" src="../images/logosemfundo.png" alt="meupet">
                 <li class="float-right nav-link dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Administrador - Dener Melo
+                        Administrador - <?php echo $_SESSION['nome_usuario']?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Sair
+                        <a class="dropdown-item" href="../logout.php">Sair
                         </a>
                     </div>
                 </li>
