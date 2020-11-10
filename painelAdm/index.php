@@ -1,9 +1,11 @@
 <?php
 
 
-//verificações para o login
+//verificações para o login - Autentica o usuario e o nivel para evitar burlar o login
+
+require_once("../conexao.php");
 @session_start();
-if(!isset($_SESSION['nome_usuario'])){
+if(!isset($_SESSION['nome_usuario']) || $_SESSION['nivel_usuario'] != 'admin'){
     header("location:../index.php");
 }
 
@@ -87,10 +89,15 @@ if (@$_GET['acao'] == $item1) {
                 <div class="col-md4 mb-4">
                     <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link <?php echo $item1ativo  ?>" id="v-pills-home-tab" href="index.php?acao=<?php echo $item1 ?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-house-user mr-2"></i>Home</a>
+                        
                         <a class="nav-link <?php echo $item2ativo  ?>" id="link-usuarios" href="index.php?acao=<?php echo $item2 ?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-users mr-2"></i>Cadastro Usuários</a>
+                        
                         <a class="nav-link <?php echo $item3ativo  ?>" id="link-racas" href="index.php?acao=<?php echo $item3 ?>" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-paw mr-2"></i>Cadastro Raças</a>
+                        
                         <a class="nav-link <?php echo $item4ativo  ?>" id="link-animais" href="index.php?acao=<?php echo $item4 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-dog mr-2"></i>Cadastro Animais</a>
+                        
                         <a class="nav-link <?php echo $item5ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item5 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-hospital-symbol mr-2"></i>Cadastro de Serviços</a>
+                        
                         <a class="nav-link <?php echo $item7ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item7 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-calendar-alt mr-2"></i>Agendar</a>
 
                         <?php
@@ -120,6 +127,8 @@ if (@$_GET['acao'] == $item1) {
                                 include_once($item6 . ".php");
                             } elseif (@$_GET['acao'] == $item7) {
                                 include_once($item7 . ".php");
+                            }else {
+                                include_once($item1 . ".php"); //ativa o default do home caso nao tenha nenhum item clicado
                             }
                             ?>
                         </div>

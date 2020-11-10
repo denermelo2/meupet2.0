@@ -21,9 +21,23 @@ $linhas = count($dados);
 if($linhas > 0 ){
     $_SESSION['nome_usuario']=$dados[0]['nome'];
     $_SESSION['nivel_usuario']=$dados[0]['nivel'];
-    header("location:painelAdm/index.php");
+    
+    if($_SESSION['nivel_usuario'] == 'admin'){
+        header("location:painelAdm/index.php");
+        exit();
+    }
+
+    if($_SESSION['nivel_usuario'] == 'user'){
+        header("location:painelUsuario/index.php");
+        exit();
+    }
+    
+
+
+
+
 }else{
-    echo "<script language='javascript'>window.alert('Dados Incorretos!!');</script>";
+    echo "<script language='javascript'>window.alert('E-mail ou Senha Incorretos!');</script>";
     
     
     echo "<script language='javascript'>window.location='index.php';</script>";
