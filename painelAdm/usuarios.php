@@ -1,5 +1,6 @@
 <div class="row ml-2">
-    <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-secondary">Novo Usuário</button>
+    <a id="btn-novo" data-toggle="modal" data-target="#modal" type="button"></a>
+    <a href="index.php?acao=usuarios&funcao=novo" type="button" class="btn btn-secondary">Novo Usuário</a>
 </div>
 
 <div class="row ml-1 mt-3">
@@ -105,12 +106,36 @@
 
 
 
-<!--Modal-->
+<!--Modal | Formulário de Cadastro de Infos-->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Cadastro de Usuários</h5>
+
+
+                <!-- Essa porção de codigo terminando na div h5, faz
+                a verificação de uma variavel para puxar o Modal Evitando assim usar o mesmo bloco mais de uma vez-->
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <?php if (@$_GET['funcao'] == 'editar') {
+                        $nome_botao = 'Editar';
+                        $id_usuario = $_GET['id'];
+
+                        //BUSCAR DADOS DO REGISTRO A SER EDITADO
+
+                        $res = $pdo->query("select * from usuarios where id = '$id_usuario'");
+                        $dados = $res->fetchAll(PDO::FETCH_ASSOC);
+                        $nome_usuario = $dados[0]['nome'];
+                        $email_usuario = $dados[0]['usuario'];
+                        $senha_usuario = $dados[0]['senha'];
+                        $email_usuario_rec = $dados[0]['usuario'];
+                        echo 'Editar Usuário';
+                    } else
+                        $nome_botao = 'Salvar';
+                        echo 'Cadastro de Usuários';
+                    ?>
+                </h5>
+
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -121,24 +146,23 @@
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Nome</label>
-                        <input type="text" class="form-control" id="" placeholder="Maria da Silva" name="nome">
+                        <input type="text" class="form-control" id="" placeholder="Maria da Silva" name="nome" value="<?php echo @$nome_usuario ?>">
                     </div>
-
-
+                    
                     <div class="form-group">
                         <label for="exampleFormControlInput1">E-mail</label>
-                        <input type="text" class="form-control" id="" placeholder="Insira seu E-mail" name="usuario">
+                        <input type="text" class="form-control" id="" placeholder="Insira seu E-mail" name="usuario" value="<?php echo @$email_usuario ?>">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleFormControlInput1">Senha</label>
-                        <input type="text" class="form-control" id="" placeholder="Insira sua senha" name="senha">
+                        <input type="text" class="form-control" id="" placeholder="Insira sua senha" name="senha" value="<?php echo @$senha_usuario ?>">
                     </div>
 
             </div>
             <div class="modal-footer">
 
-                <button type="submit" name="btn-salvar" class="btn btn-success">Salvar</button>
+                <button type="submit" name="<?php echo $nome_botao ?>" class="btn btn-success"> <?php echo $nome_botao ?></button>
 
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                 </form>
@@ -148,9 +172,19 @@
 </div>
 
 
+<!--CÓDIGO DO BOTÃO NOVO -->
+<?php
+if (@$_GET['funcao'] == 'novo') {
+?>
+    <script>
+        $('#btn-novo').click();
+    </script>
+<?php } ?>
+
+
 <!--CÓDIGO DO BOTÃO SALVAR -->
 <?php
-if (isset($_POST['btn-salvar'])) {
+if (isset($_POST['Salvar'])) {
     $nome = $_POST['nome'];
     $usuario = $_POST['usuario'];
     $senha = $_POST['senha'];
@@ -183,65 +217,17 @@ if (isset($_POST['btn-salvar'])) {
 <!--CÓDIGO DO BOTÃO EDITAR -->
 <?php
 if (@$_GET['funcao'] == 'editar') {
-    $id_usuario = $_GET['id'];
 
-
-    //BUSCAR DADOS DO REGISTRO A SER EDITADO
-
-    $res = $pdo->query("select * from usuarios where id = '$id_usuario'");
-    $dados = $res->fetchAll(PDO::FETCH_ASSOC);
-    $nome_usuario = $dados[0]['nome'];
-    $email_usuario = $dados[0]['usuario'];
-    $senha_usuario = $dados[0]['senha'];
-    $email_usuario_rec = $dados[0]['usuario'];
 
 
 ?>
 
-    <!--Modal EDITAR-->
-    <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Cadastro de Usuários</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form method="post">
-
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Nome</label>
-                            <input type="text" class="form-control" id="" placeholder="Maria da Silva" value="<?php echo $nome_usuario ?>" name="nome">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">E-mail</label>
-                            <input type="text" class="form-control" id="" placeholder="Insira seu E-mail" value="<?php echo  $email_usuario ?>" name="usuario">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Senha</label>
-                            <input type="text" class="form-control" id="" placeholder="Insira sua senha" value="<?php echo  $senha_usuario ?>" name="senha">
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-
-                    <button type="submit" name="btn-editar" class="btn btn-success">Editar</button>
-
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        $('#btn-novo').click();
+    </script>
 
     <?php
-    if (isset($_POST['btn-editar'])) {
+    if (isset($_POST['Editar'])) {
         $nome = $_POST['nome'];
         $usuario = $_POST['usuario'];
         $senha = $_POST['senha'];
@@ -278,7 +264,7 @@ if (@$_GET['funcao'] == 'editar') {
 
 
 
-<!--CÓDIGO DO BOTÃO Excluir -->
+<!--CÓDIGO DO BOTÃO EXCLUIR -->
 <?php
 if (@$_GET['funcao'] == 'excluir') {
     $id_usuario = $_GET['id'];
@@ -292,11 +278,7 @@ if (@$_GET['funcao'] == 'excluir') {
 ?>
 
 
-<!--SCRIPT PARA CHAMAR A MODAL DE EDITAR -->
 
-<script>
-    $("#modalEditar").modal("show");
-</script>
 
 
 

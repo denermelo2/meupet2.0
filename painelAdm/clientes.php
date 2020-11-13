@@ -1,5 +1,5 @@
 <div class="row ml-2">
-    <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-secondary">Novo Usuário</button>
+    <button data-toggle="modal" data-target="#modal" type="button" class="btn btn-secondary">Novo Cliente</button>
 </div>
 
 <div class="row ml-1 mt-3">
@@ -34,8 +34,8 @@
         <tr>
             <th scope="col">Código</th>
             <th scope="col">Nome</th>
-            <th scope="col">Usuario</th>
-            <th scope="col">Senha</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Telefone</th>
             <th scope="col">Nivel</th>
             <th scope="col">Ações</th>
         </tr>

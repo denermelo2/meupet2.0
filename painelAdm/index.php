@@ -20,23 +20,29 @@ $item4 = 'animais';
 $item5 = 'servicos';
 $item6 = 'notificacoes';
 $item7 = 'agendar';
+$item8 = 'tipoanimal';
+$item9 = 'clientes';
  
 //VERIFICAR COM O MENU CLICADO E PASSAR O ESTADO DE ATIVO
 
-if (@$_GET['acao'] == $item1) {
+if (@$_GET['acao'] == $item1) { //home
     $item1ativo = 'active';
-} elseif(@$_GET['acao'] == $item2 or isset($_GET[$item2])) {
-    $item2ativo = 'active';
-} elseif (@$_GET['acao'] == $item3) {
+} elseif(@$_GET['acao'] == $item2 or isset($_GET[$item2])) { //usuarios
+    $item2ativo = 'active'; 
+} elseif (@$_GET['acao'] == $item3) {//racas
     $item3ativo = 'active';
-} elseif (@$_GET['acao'] == $item4) {
+} elseif (@$_GET['acao'] == $item4) { //animais
     $item4ativo = 'active';
-} elseif (@$_GET['acao'] == $item5) {
+} elseif (@$_GET['acao'] == $item5) { //servicos
     $item5ativo = 'active';
-} elseif (@$_GET['acao'] == $item6) {
+} elseif (@$_GET['acao'] == $item6) { //notificacoes
     $item6ativo = 'active';
-} elseif (@$_GET['acao'] == $item7) {
+} elseif (@$_GET['acao'] == $item7) { //agendar
     $item7ativo = 'active';
+} elseif (@$_GET['acao'] == $item8) { //tipo animal
+    $item8ativo = 'active';
+} elseif (@$_GET['acao'] == $item9) { //cliente
+    $item9ativo = 'active';
 }
 
 ?>
@@ -91,14 +97,20 @@ if (@$_GET['acao'] == $item1) {
                         <a class="nav-link <?php echo $item1ativo  ?>" id="v-pills-home-tab" href="index.php?acao=<?php echo $item1 ?>" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="fas fa-house-user mr-2"></i>Home</a>
                         
                         <a class="nav-link <?php echo $item2ativo  ?>" id="link-usuarios" href="index.php?acao=<?php echo $item2 ?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="fas fa-users mr-2"></i>Cadastro Usuários</a>
+
+                        <a class="nav-link <?php echo $item9ativo  ?>" id="link-clientes" href="index.php?acao=<?php echo $item9 ?>" role="tab" aria-controls="v-pills-profile" aria-selected="false"><i class="far fa-address-card"></i> Cadastro de Clientes</a>
                         
                         <a class="nav-link <?php echo $item3ativo  ?>" id="link-racas" href="index.php?acao=<?php echo $item3 ?>" role="tab" aria-controls="v-pills-messages" aria-selected="false"><i class="fas fa-paw mr-2"></i>Cadastro Raças</a>
                         
+                        <a class="nav-link <?php echo $item8ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item8 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-cat"></i></i> Cadastro Tipo Animal</a>
+
                         <a class="nav-link <?php echo $item4ativo  ?>" id="link-animais" href="index.php?acao=<?php echo $item4 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-dog mr-2"></i>Cadastro Animais</a>
                         
                         <a class="nav-link <?php echo $item5ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item5 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="fas fa-hospital-symbol mr-2"></i>Cadastro de Serviços</a>
                         
                         <a class="nav-link <?php echo $item7ativo  ?>" id="v-pills-settings-tab" href="index.php?acao=<?php echo $item7 ?>" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="far fa-calendar-alt mr-2"></i>Agendar</a>
+
+                        
 
                         <?php
                         if ($notificacoes > 0) { ?>
@@ -127,6 +139,10 @@ if (@$_GET['acao'] == $item1) {
                                 include_once($item6 . ".php");
                             } elseif (@$_GET['acao'] == $item7) {
                                 include_once($item7 . ".php");
+                            } elseif (@$_GET['acao'] == $item8) {
+                                include_once($item8 . ".php");
+                            } elseif (@$_GET['acao'] == $item9) {
+                                include_once($item9 . ".php");
                             }else {
                                 include_once($item1 . ".php"); //ativa o default do home caso nao tenha nenhum item clicado
                             }
